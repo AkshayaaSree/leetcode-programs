@@ -1,0 +1,33 @@
+
+
+class Solution {
+    public String simplifyPath(String path) {
+        String[] parts = path.split("/");
+        Deque<String> stack = new ArrayDeque<>();
+
+        for (String part : parts) {
+            if (part.equals("") || part.equals(".")) {
+                // Skip empty or current directory
+                continue;
+            } else if (part.equals("..")) {
+                // Go to parent directory if possible
+                if (!stack.isEmpty()) {
+                    stack.pop();
+                }
+            } else {
+                // Valid directory or file name
+                stack.push(part);
+            }
+        }
+
+        // Build the simplified path
+        List<String> result = new ArrayList<>();
+        while (!stack.isEmpty()) {
+            result.add(0, stack.pop());  // Reverse order
+        }
+
+        return "/" + String.join("/", result);
+    }
+   
+
+}
