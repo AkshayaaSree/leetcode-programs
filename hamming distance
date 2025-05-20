@@ -1,0 +1,15 @@
+class Solution {
+    public int hammingDistance(int x, int y) {
+        // XOR the numbers to get differing bits
+        int xor = x ^ y;
+
+        // Count the number of set bits in xor (which represents differing positions)
+        int count = 0;
+        while (xor != 0) {
+            count += xor & 1;  // Add 1 if the least significant bit is set
+            xor >>= 1;         // Shift right to check the next bit
+        }
+
+        return count;
+    }
+}
